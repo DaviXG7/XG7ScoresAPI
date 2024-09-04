@@ -38,6 +38,7 @@ public class LegacyBossBar extends Score {
     public void addPlayer(Player player) {
         if (!super.getPlayers().contains(player)) {
             super.addPlayer(player);
+
             Class<?> witherClass = NMSUtil.getNMSClass("EntityWither");
             Object nmsWorld = NMSUtil.getNMSClass("World").cast(player.getWorld().getClass().getMethod("getHandle").invoke(player.getWorld()));
             Object wither = witherClass.getConstructor(NMSUtil.getNMSClass("World")).newInstance(nmsWorld);

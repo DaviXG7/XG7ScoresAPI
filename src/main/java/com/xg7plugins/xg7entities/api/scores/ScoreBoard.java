@@ -25,14 +25,12 @@ import java.util.stream.IntStream;
 public class ScoreBoard extends Score {
 
     private String[] lines;
-    private String id;
 
     private Scoreboard scoreboard;
 
     public ScoreBoard(String title, String[] lines, String id, ScoreCondition condition, long delay) {
         super(delay, new String[]{title},id, condition);
         this.lines = lines;
-        this.id = id;
 
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 
@@ -75,7 +73,6 @@ public class ScoreBoard extends Score {
     public ScoreBoard(String[] title, String[] lines, String id, ScoreCondition condition, long taskDelay) {
         super(taskDelay, title,id,condition);
         this.lines = lines;
-        this.id = id;
         this.scoreboard = Bukkit.getScoreboardManager().getNewScoreboard();
 
         Objective objective = scoreboard.registerNewObjective(id, "dummy");
@@ -121,7 +118,7 @@ public class ScoreBoard extends Score {
 
         for (Player player : super.getPlayers()) {
 
-            Objective objective = scoreboard.getObjective(id);
+            Objective objective = scoreboard.getObjective(super.getId());
 
             objective.setDisplayName(Text.format(super.getToUpdate()[super.getIndexUpdating()]).setPlaceholders(player).getText());
 
@@ -133,7 +130,7 @@ public class ScoreBoard extends Score {
 
                 String entry = IntStream.range(0, index).mapToObj(i -> "§r").collect(Collectors.joining());
 
-                Team team = scoreboard.getTeam(id + ":Team=" + index);
+                Team team = scoreboard.getTeam(super.getId() + ":Team=" + index);
 
                 s = Text.format(s).setPlaceholders(player).getText();
 
